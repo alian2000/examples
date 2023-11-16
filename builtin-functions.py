@@ -13,3 +13,10 @@ print (input[3].upper())
 for language in input:
     print (language)
     print(language.lower())
+for prog in input:
+    if prog=="Python":
+        print("we are learning "+ prog+"  now" )
+    else:
+        print("learn "+prog+" in the future")
+        print (prog)
+        print(prog.lower())
