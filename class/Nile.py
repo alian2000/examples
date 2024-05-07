@@ -6,29 +6,40 @@ class River:
         self.name = name
         self.length = length
         # add current river to the list of all rivers
+        print("test",self.name,self.length,self)
+        print("self_represents_intance_of_class= ",self)
         River.all_rivers.append(self)
-        print(River.all_rivers.append(self))
+        #print(River.all_rivers.append(self))
     def get_info(self):
-        print("The length of the {0} is {1} km".format(self.name, self.length))
+        #print("The length of the {0} is {1} km".format(self.name, self.length))
+        print("without_format",self.name, self.length)
     
 
 volga = River("Volga", 3530)
+print(volga)
+volga.get_info()
 print(River.all_rivers[0])
-# seine = River("Seine", 776)
-# # print(River.all_rivers)
-# nile = River("Nile", 6852)
-# # print(River.all_rivers)
+print("###############################################################")
+#print(River.all_rivers)
+seine = River("Seine", 776)
+print(River.all_rivers)
+print("###############################################################")
 
-# # print all river names
+nile = River("Nile", 6852)
+print(River.all_rivers)
+print("###############################################################")
+
+print ("all river names")
 for river in River.all_rivers:
     print(river.name,river.length)
-    print(river.name[0])
-# # Output:
-# # Volga
-# # Seine
-# # Nile
+    #print(river.name[0])
+    print(river)    
+# Output:
+# Volga
+# Seine
+# Nile
 
-# volga.get_info()
+
 # # The length of the Volga is 3530 km
 # seine.get_info()
 # # The length of the Seine is 776 km
