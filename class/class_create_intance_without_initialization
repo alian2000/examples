@@ -1,0 +1,62 @@
+import time
+import datetime
+# creating a class with the name Student without initializing method __init__
+
+
+class Student:
+      name = "Dan"
+      rollNumber = 18
+      time = datetime.datetime.fromtimestamp(time.time())
+      #print('The Value of Student Name:',name)
+      #print('The Value of Roll Number:',rollNumber)
+
+      def get_name(self):
+         return self.name
+
+      def get_rollNumber(self):
+            return self.rollNumber
+
+      def get_student(self):
+            return self.name, self.rollNumber, self.time
+
+      def set_student(self, name, rollNumber):
+            self.name = name
+            self.rollNumber = rollNumber
+
+      def set_student_name(self, name):
+            self.name = name
+
+
+#Creating the Object/instance for the student class without passing argument
+
+studentobjectnull=Student()
+
+# print default/initial values for the instance studentobjectnull using defined get methods
+print(studentobjectnull.get_name())
+
+print(studentobjectnull.get_rollNumber())
+
+print(studentobjectnull.get_student())
+
+#print(studentobjectnull.__dict__)
+#show a print out without the get methodes.
+print(studentobjectnull.name,studentobjectnull.rollNumber)
+
+#Use the setter method to change default/initial values and then use the getter methods to print out the new values/parameters
+studentobjectnull.set_student("ahmed",40)
+
+print(studentobjectnull.get_name())
+
+print(studentobjectnull.get_rollNumber())
+
+print(studentobjectnull.get_student())
+
+#Update the name variable only using a setter method and then get all of the parameters after the update.
+
+studentobjectnull.set_student_name("Muhammad")
+print(studentobjectnull.get_name())
+
+print(studentobjectnull.get_rollNumber())
+
+print(studentobjectnull.get_student())
+
