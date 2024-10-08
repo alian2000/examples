@@ -1,0 +1,168 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-a
+  namespace: nginx-ingress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-a
+  template:
+    metadata:
+      labels:
+        app: microservice-a
+    spec:
+      containers:
+      - name: microservice-a
+        image: nginx
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-b
+  namespace: nginx-ingress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-b
+  template:
+    metadata:
+      labels:
+        app: microservice-b
+    spec:
+      containers:
+      - name: microservice-b
+        image: nginx
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-c
+  namespace: nginx-ingress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-c
+  template:
+    metadata:
+      labels:
+        app: microservice-c
+    spec:
+      containers:
+      - name: microservice-c
+        image: nginx
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-a
+  namespace: nginx-ingress
+spec:
+  selector:
+    app: microservice-a
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-b
+  namespace: nginx-ingress
+spec:
+  selector:
+    app: microservice-b
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-c
+  namespace: nginx-ingress
+spec:
+  selector:
+    app: microservice-c
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  namespace: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /service-a
+        pathType: Prefix
+        backend:
+          service:
+            name: microservice-a
+            port:
+              number: 80
+      - path: /service-b
+        pathType: Prefix
+        backend:
+          service:
+            name: microservice-b
+            port:
+              number: 80
+      - path: /service-c
+        pathType: Prefix
+        backend:
+          service:
+            name: microservice-c
+            port:
+              number: 80
+
+
